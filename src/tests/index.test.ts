@@ -1,10 +1,48 @@
 import Pterodactyl from "..";
 
+const apikey = "wL1RwAo9Kj8dMucMbKX8kcFo4daCsnfggQLhJjU8bEf98BK9";
+const ptero = new Pterodactyl("https://admin.hosting.raznar.id", apikey);
+
 test("GetAllServers", (done) => {
-    const apikey = "3sAIRYeiZfB7BVmlweNd7WCB8hcUzwGKs5MjyopdlxyrWjqh";
-    const ptero = new Pterodactyl("https://admin.hosting.raznar.id", apikey);
     ptero.client.getAllServers().then((servers) => {
-        expect(servers).toHaveReturned();
+        if (servers.length > 0) {
+            done();
+        }
+    }).catch((e) => {
+        done(e);
+    });
+});
+
+test("GetAccountDetails", (done) => {
+    ptero.client.account.getDetails().then((account) => {
+        expect(account).toBeDefined();
+        done();
+    }).catch((e) => {
+        done(e);
+    });
+});
+
+test("ShowPermissions", (done) => {
+    ptero.client.showPermissions().then((permissions) => {
+        expect(permissions).toBeDefined();
+        done();
+    }).catch((e) => {
+        done(e);
+    });
+});
+
+test("GetServerDetails", (done) => {
+    ptero.client.getServerDetails("d52ae19b").then((server) => {
+        expect(server).toBeDefined();
+        done();
+    }).catch((e) => {
+        done(e);
+    });
+});
+
+test("CaptureConsole", (done) => {
+    ptero.client.consoleServer("d52ae19b").then((consoleEvent) => {
+        expect(consoleEvent).toBeDefined();
         done();
     }).catch((e) => {
         done(e);

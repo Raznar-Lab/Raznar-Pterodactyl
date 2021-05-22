@@ -52,3 +52,10 @@ export interface IAccountDetails {
     last_name: string;
     language: string;
 }
+
+export interface IWebSocketDetail {
+    data: {
+        token: string;
+        socket: string;
+    }
+}
