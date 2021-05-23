@@ -1,6 +1,6 @@
 import { IRequest } from "../../typings";
 import DactylError from "../../util/error";
-export default async function(request: IRequest, currentPassword: string, newPassword: string): Promise<boolean> {
+export default async function UpdatePassword(request: IRequest, currentPassword: string, newPassword: string): Promise<boolean> {
     try {
         const response = await request("/account/password", {
             method: "PUT",

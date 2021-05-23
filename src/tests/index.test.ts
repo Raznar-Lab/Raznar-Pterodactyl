@@ -2,7 +2,6 @@ import Pterodactyl from "..";
 
 const apikey = "wL1RwAo9Kj8dMucMbKX8kcFo4daCsnfggQLhJjU8bEf98BK9";
 const ptero = new Pterodactyl("https://admin.hosting.raznar.id", apikey);
-
 test("GetAllServers", (done) => {
     ptero.client.getAllServers().then((servers) => {
         if (servers.length > 0) {
@@ -32,7 +31,7 @@ test("ShowPermissions", (done) => {
 });
 
 test("GetServerDetails", (done) => {
-    ptero.client.getServerDetails("d52ae19b").then((server) => {
+    ptero.client.server("d52ae19b").getDetails().then((server) => {
         expect(server).toBeDefined();
         done();
     }).catch((e) => {
@@ -40,11 +39,10 @@ test("GetServerDetails", (done) => {
     });
 });
 
-test("CaptureConsole", (done) => {
-    ptero.client.consoleServer("d52ae19b").then((consoleEvent) => {
-        expect(consoleEvent).toBeDefined();
+
+test("GetSchedules", (done) => {
+    ptero.client.server("d52ae19b").schedule.getAll().then(schedules => {
+        expect(schedules).toBeDefined();
         done();
-    }).catch((e) => {
-        done(e);
-    });
+    }).catch((e) => done(e));
 });

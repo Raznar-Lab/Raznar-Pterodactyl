@@ -4,10 +4,10 @@ import DactylError from "../../util/error";
 export default async function UpdateEmail(request: IRequest, newEmail: string, password: string): Promise<true> {
     try {
         const response = await request("/account/email", {
-            method: "PATCH",
+            method: "PUT",
             body: new URLSearchParams({
-                email: newEmail,
-                password
+                "email": newEmail,
+                "password": password
             })
         });
         if (response.status !== 201) throw new DactylError(response.statusText);
