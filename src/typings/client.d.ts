@@ -128,16 +128,41 @@ export interface IClientServerScheduleTaskArgs {
 }
 
 export interface IClientServerBackups {
-    uuid: string,
-    name: string,
-    ignored_files: string[],
-    sha256_hash: string,
-    bytes: number,
-    created_at: string,
-    completed_at: string
+    uuid: string;
+    name: string;
+    ignored_files: string[];
+    sha256_hash: string;
+    bytes: number;
+    created_at: string;
+    completed_at: string;
 }
 
 export interface IClientServerBackupsArgs {
-    name: string,
-    ignored_files: string[]
+    name: string;
+    ignored_files: string[];
+}
+
+export interface IClientServerVariable {
+    name: string;
+    description: string;
+    env_variable: string;
+    default_value: string;
+    server_value: string;
+    is_editable: boolean;
+    rules: string;
+}
+
+export interface IClientServerStartupVariableArgs {
+    key: string;
+    value: string;
+}
+
+export interface IClientServerUser {
+    uuid: string;
+    username: string;
+    email: string;
+    image: string;
+    created_at: string;
+    "2fa_enabled": boolean;
+    permissions: string[];
 }

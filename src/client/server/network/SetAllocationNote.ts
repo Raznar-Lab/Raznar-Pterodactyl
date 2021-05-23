@@ -1,12 +1,13 @@
 import type { IRequest } from "../../../typings";
+import { stringify } from "query-string";
 import DactylError from "../../../util/error";
 
-export default async function SetAllocationNote(request: IRequest, serverID: string, allocation: number, allocationNotes: string) {
+export default async function SetAllocationNote(request: IRequest, serverID: string, allocationID: number, allocationNotes: string) {
     try {
-        const response = await request(`/servers/${serverID}/network/allocations/${allocation}`, {
+        const response = await request(`/servers/${serverID}/network/allocations/${allocationID}`, {
             method: "POST",
-            body: new URLSearchParams({
-                "notes": allocationNotes
+            body: stringify({
+                notes: allocationNotes
             })
         });
         if (response.status !== 200) throw new DactylError(response.statusText);
