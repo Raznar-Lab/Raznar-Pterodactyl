@@ -43,6 +43,7 @@ import UploadFile from "./server/files/UploadFile";
 import GetUploadFileUrl from "./server/files/GetUploadFileUrl";
 import CompressFile from "./server/files/CompressFile";
 import DecompressFile from "./server/files/DecompressFile";
+import CreateFolder from "./server/files/CreateFolder";
 
 export default class Client {
     constructor(private _request: IRequest) {}
@@ -356,6 +357,17 @@ class FilesClient {
      */
     public getAll = (serverID: string, directory?: string) => ListFiles(this._request, serverID, directory);
 
+    /**
+     * Create a folder
+     * 
+     * @param serverID Server Identifier
+     * @param args
+     * The arguments:
+     *    - root - root directory
+     *    - name - the folder name 
+     * @return if the operation is successful or not ({@link boolean})
+     */
+    public createFolder = (serverID: string, args: { root: string; name: string; }) => CreateFolder(this._request, serverID, args);
     /**
      * Writes a data to the given file and directory
      * 

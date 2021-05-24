@@ -1,12 +1,11 @@
 import type { IRequest } from "../../../typings";
-import { stringify } from "query-string";
 import DactylError from "../../../util/error";
 
 export default async function SetAllocationNote(request: IRequest, serverID: string, allocationID: number, allocationNotes: string) {
     try {
         const response = await request(`/servers/${serverID}/network/allocations/${allocationID}`, {
             method: "POST",
-            body: stringify({
+            body: JSON.stringify({
                 notes: allocationNotes
             })
         });

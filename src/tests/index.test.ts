@@ -47,16 +47,19 @@ test("GetSchedules", (done) => {
     }).catch((e) => done(e));
 });
 
-test("CreateSchedule", (done) => {
-    ptero.client.server.schedule.create("d52ae19b", {
-        day_of_month: "*",
-        day_of_week: "*",
-        hour: "*",
-        minute: "*",
-        name: "Schedule 1",
-        is_active: false
-    }).then((schedule) => {
-        expect(schedule).toBeDefined();
+test("CreateFolder", (done) => {
+    ptero.client.server.files.createFolder("d52ae19b", {
+        root: "/",
+        name: "test"
+    }).then((success) => {
+        expect(success).toBeTruthy();
+        done();
+    }).catch((e) => done(e));
+});
+
+test("WriteFile", (done) => {
+    ptero.client.server.files.write("d52ae19b", "pepek.txt", "ABCDEF", "test").then((success) => {
+        expect(success).toBeTruthy();
         done();
     }).catch((e) => done(e));
 });
