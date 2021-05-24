@@ -3,7 +3,7 @@ import Pterodactyl from "..";
 const apikey = "wL1RwAo9Kj8dMucMbKX8kcFo4daCsnfggQLhJjU8bEf98BK9";
 const ptero = new Pterodactyl("https://admin.hosting.raznar.id", apikey);
 test("GetAllServers", (done) => {
-    ptero.client.server.all().then((servers) => {
+    ptero.client.server.getAll().then((servers) => {
         if (servers.length > 0) {
             done();
         }
@@ -41,7 +41,7 @@ test("GetServerDetails", (done) => {
 
 
 test("GetSchedules", (done) => {
-    ptero.client.server.schedule.all("d52ae19b").then(schedules => {
+    ptero.client.server.schedule.getAll("d52ae19b").then(schedules => {
         expect(schedules).toBeDefined();
         done();
     }).catch((e) => done(e));

@@ -1,4 +1,4 @@
-import { IRequest, IClientServerUser } from "../../../typings";
+import type { IRequest, IClientServerUser } from "../../../typings";
 import DactylError from "../../../util/error";
 
 export default async function GetUsers(request: IRequest, serverID: string): Promise<IClientServerUser[]> {

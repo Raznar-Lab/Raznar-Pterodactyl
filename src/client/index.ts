@@ -1,4 +1,4 @@
-import type { IClientServerScheduleRequest, IClientServerScheduleTaskArgs, IClientServerStartupVariableArgs, IRequest, IClientServerBackupsArgs } from "../typings";
+import type { IClientServerScheduleRequest, IClientServerScheduleTaskArgs, IClientServerStartupVariableArgs, IRequest, IClientServerBackupsArgs, IClientServerUserRequest, IClientServerDatabaseRequest } from "../typings";
 import TwoFactorAuthentication from "./account/2FA";
 import AccountDetails from "./account/details";
 import EnableTwoFactorAuthentication from "./account/Enable2FA";
@@ -11,7 +11,7 @@ import GetAllocations from "./server/network/GetAllocations";
 import SetAllocationNote from "./server/network/SetAllocationNote";
 import SetAsPrimary from "./server/network/SetAsPrimary";
 import createSchedule from "./server/schedules/CreateSchedule";
-import { GetSchedules } from "./server/schedules/GetSchedules";
+import GetSchedules from "./server/schedules/GetSchedules";
 import ConsoleServer from "./server/Console";
 import GetServerDetails from "./server/GetDetails";
 import ShowPermissions from "./ShowPermissions";
@@ -26,6 +26,23 @@ import GetBackups from "./server/backups/GetBackups";
 import DeleteBackup from "./server/backups/DeleteBackup";
 import DownloadBackup from "./server/backups/DownloadBackup";
 import GetUsers from "./server/users/GetUsers";
+import CreateUser from "./server/users/CreateUser";
+import DeleteUser from "./server/users/DeleteUser";
+import UpdateUser from "./server/users/UpdateUser";
+import ListDatabases from "./server/databases/ListDatabases";
+import CreateDatabase from "./server/databases/CreateDatabase";
+import DeleteDatabase from "./server/databases/DeleteDatabase";
+import RotateDatabasePassword from "./server/databases/RotateDatabasePassword";
+import ListFiles from "./server/files/ListFiles";
+import WriteFile from "./server/files/WriteFile";
+import CopyFile from "./server/files/CopyFile";
+import DownloadFile from "./server/files/DownloadFile";
+import DeleteFile from "./server/files/DeleteFile";
+import GetFileContents from "./server/files/GetFileContents";
+import UploadFile from "./server/files/UploadFile";
+import GetUploadFileUrl from "./server/files/GetUploadFileUrl";
+import CompressFile from "./server/files/CompressFile";
+import DecompressFile from "./server/files/DecompressFile";
 
 export default class Client {
     constructor(private _request: IRequest) {}
@@ -79,7 +96,7 @@ class ServerClient {
      */
     public getAll = () => GetAllServers(this._request);
     /**
-     * Getting console information with websocket
+     * Gets a console server information with websocket
      * 
      * @param serverID Server Identifier
      */
@@ -95,6 +112,8 @@ class ServerClient {
     public startup = new StartupClient(this._request);
     public backup = new BackupsClient(this._request);
     public users = new UsersClient(this._request);
+    public databases = new DatabaseClient(this._request);
+    public files = new FilesClient(this._request);
 }
 
 class ServerScheduleClient {
@@ -257,9 +276,168 @@ class UsersClient {
     constructor(private _request: IRequest) {}
 
     /**
-     * Retrieves subusers from a server
+     * Retrieves subusers on specified server
      * 
      * @param serverID Server Identifier
      */
     public getAll = (serverID: string) => GetUsers(this._request, serverID);
+
+    /**
+     * Create subuser for the specified user.
+     * 
+     * @param serverID Server Identifier
+     * @param args Client subusers arguments want to send.
+     * @returns 
+     */
+    public create = (serverID: string, args: IClientServerUserRequest) => CreateUser(this._request, serverID, args);
+
+    /**
+     * Updating permissions for the specified subuser from a server.
+     * 
+     * @param serverID Server Identifier
+     * @param userUUID Subuser identifier
+     * @param permissions Permissions for subuser `Array<String>`
+     */
+    public update = (serverID: string, userUUID: string, permissions: string[]) => UpdateUser(this._request, serverID, userUUID, permissions);
+
+    /**
+     * Delete subuser for the specified server.
+     * 
+     * @param serverID Server Identifier
+     * @param userUUID Subuser Identifier
+     */
+    public delete = (serverID: string, userUUID: string) => DeleteUser(this._request, serverID, userUUID);
+}
+
+class DatabaseClient {
+    constructor(private _request: IRequest) {}
+
+    /**
+     * Lists all schedules added to the server
+     * 
+     * @param serverID Server Identifier
+     */
+    public getAll = (serverID: string) => ListDatabases(this._request, serverID)
+    /**
+     * Creates a new database
+     * 
+     * @param serverID Server Identifier
+     * @param args Create database arguments
+     */
+    public create = (serverID: string, args: IClientServerDatabaseRequest) => CreateDatabase(this._request, serverID, args);
+
+    /**
+     * Deletes the specified database
+     * 
+     * @param serverID Server Identifier
+     * @param databaseID Database Identifier/ID
+     */
+    public delete = (serverID: string, databaseID: string) => DeleteDatabase(this._request, serverID, databaseID);
+
+    /**
+     * Changes the password of a specified database
+     * 
+     * @param serverID Server Identifier
+     * @param databaseID Database Identifier/ID
+     */
+    public rotate = (serverID: string, databaseID: string) => RotateDatabasePassword(this._request, serverID, databaseID);
+}
+
+class FilesClient {
+    constructor(private _request: IRequest) {}
+
+    /**
+     * Get an array of file in the provided 
+     * directory of a server
+     * 
+     * @param serverID Server Identifier
+     * @param directory The directory to get the files from
+     * @returns An array of {@link IClientServerFile}
+     */
+    public getAll = (serverID: string, directory?: string) => ListFiles(this._request, serverID, directory);
+
+    /**
+     * Writes a data to the given file and directory
+     * 
+     * @param serverID Identifier
+     * @param fileName The file name to write to
+     * @param directory The directory (if there's any)
+     * @return if the operation is successful or not ({@link boolean})
+     */
+    public write = (serverID: string, fileName: string, content: string, directory?: string) => WriteFile(this._request, serverID, fileName, content, directory);
+    
+    /**
+     * Copy a file from the location
+     * 
+     * @param serverID Server Identifier 
+     * @param location The location to copy
+     * @return if the operation is successful or not ({@link boolean})
+     */
+    public copy = (serverID: string, location: string) => CopyFile(this._request, serverID, location);
+
+    /**
+     * Get the URL to download the given file
+     * 
+     * @param serverID Server Identifier
+     * @param file the file name to get the download link from
+     * @return a {@link String} of the download link
+     */
+    public getDownloadUri = (serverID: string, file: string) => DownloadFile(this._request, serverID, file);
+
+    /**
+     * Delete the specified file or folder
+     * 
+     * @param serverID Server Identifier
+     * @param args 
+     * The arguments:
+     *    - root - the folder
+     *    - files - an array of file name to delete
+     * @return if the operation is successful or not ({@link boolean})
+     */
+    public deleteFile = (serverID: string, args: { root: string; files: string[]; }) => DeleteFile(this._request, serverID, args);
+    
+    /**
+     * Get the content of the specified file
+     * 
+     * @param serverID Server Identifier
+     * @param file The path to the file
+     * @return The file content
+     */
+    public getContents = (serverID: string, file: string) => GetFileContents(this._request, serverID, file);
+
+    /**
+     * Upload a file to the specified directory
+     * 
+     * @param serverID Server Identifier
+     * @param files 
+     * @return true if the operation is successful
+     */
+    public uploadFile = (serverID: string, files: { filename: string; buffer: Buffer; }[], directory?: string) => UploadFile(this._request, serverID, files, directory);
+    
+    /**
+     * Get a file URI link to upload to 
+     * the specified server
+     * 
+     * @param serverID Server Identifier
+     * @return the URL
+     */
+    public getUploadFileUri = (serverID: string) => GetUploadFileUrl(this._request, serverID);
+
+    /**
+     * Compress one or more files
+     * 
+     * @param serverID Server Identifier
+     * @param args the folder and file names to be compressed
+     * @return the compressed file
+     */
+    public compressFile = (serverID: string, args: { root: string; files: string[]; }) => CompressFile(this._request, serverID, args);
+    
+    /**
+     * Decompress a file from it's compressed form
+     * 
+     * @param serverID Server Identifier
+     * @param args the folder and file names to be decompressed
+     * @return if the operation is successful or not ({@link boolean})
+     */
+    public decompressFile = (serverID: string, args: { root: string; files: string[]; }) => DecompressFile(this._request, serverID, args);
 }

@@ -166,3 +166,54 @@ export interface IClientServerUser {
     "2fa_enabled": boolean;
     permissions: string[];
 }
+
+export interface IClientServerUserRequest {
+    uuid: string;
+    email: string;
+    permissions: string[];
+}
+
+export interface IClientServerDatabase {
+    id: string;
+    host: {
+      address: number;
+      port: number;
+    }
+    name: string;
+    username: string;
+    connections_from: string;
+    max_connections: number,
+    relationships: {
+      password: {
+        object: string;
+        attributes: {
+          password: string;
+        }
+      }
+    }
+}
+
+export interface IClientServerDatabaseRequest {
+    database: string;
+    remote: string;
+}
+
+export interface IClientServerFile {
+    name: string;
+    mode: string;
+    size: number;
+    is_file: boolean;
+    is_symlink: boolean;
+    is_editable: boolean;
+    mimetype: string;
+    created_at: string;
+    modified_at: string;
+}
+
+export interface IClientServerRenameFileRequest {
+    root: string;
+    files: {
+        from: string,
+        to: string;
+    }[];
+} 
