@@ -28,6 +28,7 @@ export default class Admin {
     public location = new LocationAdmin(this._request);
     public nests = new NestsAdmin(this._request)
     public users = new UsersAdmin(this._request);
+    public nodes = new NodesAdmin(this._request)
 }
 
 class LocationAdmin {
