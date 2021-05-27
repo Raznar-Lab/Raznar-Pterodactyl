@@ -7,8 +7,7 @@ export default async function GetSchedules(request: IRequest, serverID: string):
             method: "GET"
         });
         const json = await response.json();
-        if (json.data.length > 0) return json.data.map(jsonSchedules => jsonSchedules.attributes);
-        else return [];
+        return json.data.length > 0 ? json.data.map(jsonSchedules => jsonSchedules.attributes) : [];
     } catch (error) {
         throw new DactylError(error);
     }

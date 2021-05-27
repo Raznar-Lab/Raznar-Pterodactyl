@@ -1,7 +1,7 @@
 import { IRequest, IAdminNest } from "../../typings";
 import DactylError from "../../util/error";
 
-export default async function(request: IRequest, nestID: number): Promise<IAdminNest> {
+export default async function GetNestDetails(request: IRequest, nestID: number): Promise<IAdminNest> {
     try {
         const response = await request(`/nests/${nestID}`, {
             method: "GET"

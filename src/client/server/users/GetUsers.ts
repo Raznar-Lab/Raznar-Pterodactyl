@@ -7,8 +7,7 @@ export default async function GetUsers(request: IRequest, serverID: string): Pro
             method: "GET"
         });
         const json = await response.json();
-        if(json.length > 0) return json.attributes.map(user => user.attributes)
-        else return [];
+        return json.data.length > 0 ? json.data.map(user => user.attributes) : [];
     } catch (e) {
         throw new DactylError(e);
     }

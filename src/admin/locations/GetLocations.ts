@@ -8,7 +8,7 @@ export default async function GetLocations(request: IRequest): Promise<IAdminLoc
         });
         if (response.status !== 200) throw new DactylError(response.statusText);
         const json = await response.json();
-        return json.data.length > 0 ? json.data.map(d => d.attributes) : [];
+        return json.data.length > 0 ? json.data.map(locations => locations.attributes) : [];
     } catch (error) {
         throw new DactylError(error);
     }

@@ -80,3 +80,10 @@ test("GetEggsDetails", (done) => {
         done();
     }).catch((e) => done(e));
 });
+
+test("GetUsers", (done) => {
+    pteroAdmin.admin.users.getAll().then((success) => {
+        expect(success).toBeTruthy();
+        done();
+    }).catch((e) => done(e));
+})

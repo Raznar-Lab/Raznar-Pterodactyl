@@ -7,8 +7,7 @@ export default async function ListDatabases(request: IRequest, serverID: string)
             method: "GET"
         });
         const json = await response.json();
-        if (json.data.length > 0 ) return json.data.map(jsonDatabase => jsonDatabase.attributes);
-        else return [];
+        return json.data.length > 0 ? json.data.map(jsonDatabase => jsonDatabase.attributes) : [];
     } catch (e) {
         throw new DactylError(e);
     }

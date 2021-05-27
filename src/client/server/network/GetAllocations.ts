@@ -8,10 +8,7 @@ export default async function GetAllocations(request: IRequest, serverID: string
         });
         if (response.status !== 200) throw new DactylError(response.statusText);
         const json = await response.json();
-        if(json.data.length > 0)
-            return json.data.map(jsonAllocations => jsonAllocations.attributes);
-        else
-            return [];
+        return json.data.length > 0 ? json.data.map(jsonAllocations => jsonAllocations.attributes) : [];
     } catch (e) {
         throw new DactylError(e);
     }

@@ -7,8 +7,7 @@ export default async function GetBackups(request: IRequest, serverID: string): P
             method: "GET"
         });
         const json = await response.json();
-        if(json.data.length > 0) return json.map(jsonBackups => jsonBackups.attributes);
-        else return [];
+        return json.data.length > 0 ? json.data.map(jsonBackups => jsonBackups.attributes) : [];
     } catch (e) {
         throw new DactylError(e);
     }
