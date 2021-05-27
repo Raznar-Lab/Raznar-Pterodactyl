@@ -373,10 +373,9 @@ class FilesClient {
      * 
      * @param serverID Identifier
      * @param fileName The file name to write to
-     * @param directory The directory (if there's any)
      * @return if the operation is successful or not ({@link boolean})
      */
-    public write = (serverID: string, fileName: string, content: string, directory?: string) => WriteFile(this._request, serverID, fileName, content, directory);
+    public write = (serverID: string, fileName: string, content: string) => WriteFile(this._request, serverID, fileName, content);
     
     /**
      * Copy a file from the location
