@@ -5,8 +5,8 @@ import http from "./util/http";
 
 export default class Pterodactyl {
     constructor(public hostURL: string, private apiKey: string) {}
-    public clientRequest = (apiEndpoint: string, options?: RequestInit, contentType = "application/json"): Promise<Response> => http(this.hostURL, true, this.apiKey, apiEndpoint, options, contentType);
-    public adminRequest = (apiEndpoint: string, options?: RequestInit, contentType = "application/json"): Promise<Response> => http(this.hostURL, false, this.apiKey, apiEndpoint, options, contentType);
+    private clientRequest = (apiEndpoint: string, options?: RequestInit, contentType = "application/json"): Promise<Response> => http(this.hostURL, true, this.apiKey, apiEndpoint, options, contentType);
+    private adminRequest = (apiEndpoint: string, options?: RequestInit, contentType = "application/json"): Promise<Response> => http(this.hostURL, false, this.apiKey, apiEndpoint, options, contentType);
 
     public client = new Client(this.clientRequest);
     public admin = new Admin(this.adminRequest);
