@@ -4,7 +4,7 @@ export default async function UpdatePassword(request: IRequest, currentPassword:
     try {
         const response = await request("/account/password", {
             method: "PUT",
-            body: new URLSearchParams({
+            body: JSON.stringify({
                 "current_password": currentPassword,
                 "password": newPassword,
                 "password_confirmation": newPassword

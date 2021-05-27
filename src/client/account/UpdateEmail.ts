@@ -5,7 +5,7 @@ export default async function UpdateEmail(request: IRequest, newEmail: string, p
     try {
         const response = await request("/account/email", {
             method: "PUT",
-            body: new URLSearchParams({
+            body: JSON.stringify({
                 "email": newEmail,
                 "password": password
             })

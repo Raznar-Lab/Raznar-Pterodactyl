@@ -5,7 +5,9 @@ export default async function DisableTwoFactorAuthentication(request: IRequest, 
     try {
         const response = await request("/account/two-factor", {
             method: "DELETE",
-            body: new URLSearchParams({ password })
+            body: JSON.stringify({
+                "password": password
+            })
         });
         if (response.status !== 204) return false;
         return true;

@@ -1,6 +1,7 @@
 import type { IClientServerScheduleRequest, IClientServerScheduleTaskArgs, IClientServerStartupVariableArgs, IRequest, IClientServerBackupsArgs, IClientServerUserRequest, IClientServerDatabaseRequest } from "../typings";
 import TwoFactorAuthentication from "./account/2FA";
 import AccountDetails from "./account/details";
+import DisableTwoFactorAuthentication from "./account/Disable2FA";
 import EnableTwoFactorAuthentication from "./account/Enable2FA";
 import UpdateEmail from "./account/UpdateEmail";
 import UpdatePassword from "./account/UpdatePassword";
@@ -57,17 +58,24 @@ export default class Client {
 class AccountClient {
     constructor(private _request: IRequest) {}
     /**
-     * Retrieves a detail of user's account
-     * 
-     */
-    public getDetails = () => AccountDetails(this._request);
-    /**
      * Generates a QR Code url for 2FA
      * 
      */
     public twoFactor = () => TwoFactorAuthentication(this._request);
     /**
-     * Enables 2FA for user's account.
+     * Retrieves a detail of user's account
+     * 
+     */
+    public getDetails = () => AccountDetails(this._request);
+    /**
+     * Disables 2FA from user's account.
+     * 
+     * @param password User Account's password
+     * @returns 
+     */
+    public disableTwoFactor = (password: string) => DisableTwoFactorAuthentication(this._request, password);
+     /**
+     * Enables 2FA to user's account.
      * 
      * @param otpCode OTP Code from 2FA QR
      * @returns 

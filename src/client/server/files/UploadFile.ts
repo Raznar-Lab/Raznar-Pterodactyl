@@ -7,7 +7,6 @@ import GetUploadFileUrl from "./GetUploadFileUrl";
 export default async function UploadFile(request: IRequest, serverID: string, files: {filename: string; buffer: Buffer}[], directory?: string): Promise<true> {
     try {
         const url = await GetUploadFileUrl(request, serverID);
-        // uploading
         const form = new FormData();
         Array.from(files).forEach(file => form.append("files", file));
         const response = await fetch(url + directory ? directory : "", {

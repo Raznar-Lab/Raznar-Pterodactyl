@@ -57,6 +57,55 @@ export interface IAdminServer {
     updated_at: string;
     created_at: string;
 }
+export interface IAdminServerRequest {
+    name: string;
+    user: number;
+    egg: number;
+    docker_image: string;
+    startup: string;
+    environment: Record<string, any>;
+    limits: {
+      memory: number;
+      swap: number;
+      disk: number;
+      io: number;
+      cpu: number;
+    }
+    feature_limits: {
+      databases: number;
+      backups: number;
+    }
+    allocation: {
+      default: number;
+    }
+}
+export interface IAdminServerDetailsRequest {
+    name: string;
+    user: number;
+    external_id: string;
+    description: string;
+}
+export interface IAdminServerBuildRequest {
+    allocation: number;
+    memory: number;
+    swap: number;
+    disk: number;
+    io: number;
+    cpu: number;
+    threads?: number;
+    feature_limits: {
+      databases: number;
+      allocations: number;
+      backups: number;
+    }
+}
+export interface IAdminServerStartupRequest {
+    startup: string;
+    environment?: Record<string, any>;
+    egg: number;
+    image: string;
+    skip_scripts: boolean;
+}
 export interface IAdminEgg {
     id: number;
     uuid: string;
@@ -189,4 +238,30 @@ export interface IAdminAllocation {
     port: number;
     notes?: string;
     assigned: boolean;
+}
+
+export interface IAdminServerDatabase {
+    id: number;
+    server: number;
+    host: number;
+    database: string;
+    username: string;
+    remote: string;
+    max_connections?: number;
+    created_at: string;
+    updated_at: string;
+    relationships?: {
+        password: {
+          object: string;
+          attributes: {
+            password: string;
+          }
+        }
+    }
+}
+
+export interface IAdminServerDatabaseRequest {
+    database: string;
+    remote?: string;
+    host?: number;
 }

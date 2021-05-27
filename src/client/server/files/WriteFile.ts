@@ -7,8 +7,6 @@ export default async function WriteFile(request: IRequest, serverID: string, fil
             method: "POST",
             body: content
         });
-        console.log(response);
-        console.log(content);
         return response.status === 204;
     } catch (error) {
         throw new DactylError(error);

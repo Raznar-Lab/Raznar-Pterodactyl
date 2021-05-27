@@ -32,15 +32,6 @@ export interface IClientServer {
     };
     is_suspended: boolean;
     is_installing: boolean;
-    relationships: {
-        [relation: string]: {
-            object: "list";
-            data: {
-                object: string;
-                attributes: unknown;
-            }[];
-        }
-    } 
 }
 
 export interface IClientAllocations {
@@ -95,7 +86,6 @@ export interface IClientServerSchedule {
     next_run_at?: string;
     created_at: string;
     updated_at: string;
-    relationships: IClientServer["relationships"];
 }
 
 

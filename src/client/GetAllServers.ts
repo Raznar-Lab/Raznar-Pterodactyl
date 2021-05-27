@@ -3,7 +3,7 @@ import DactylError from "../util/error";
 
 export default async function GetAllServers(request: IRequest): Promise<IClientServer[]> {
     try {
-        const response = await request("?include=egg,subusers", {
+        const response = await request("/servers", {
             method: "GET"
         });
         if (response.status !== 200) throw new DactylError(response.statusText);
