@@ -1,8 +1,16 @@
 {
   "name": "ractyl",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The library makes it easy to manage pterodactyl APIs with the completeness of available functions.",
   "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "bugs": {
+    "url": "https://github.com/Raznar-Lab/Raznar-Pterodactyl/issues"
+  },
+  "repository": {
+    "url": "https://github.com/Raznar-Lab/Raznar-Pterodactyl"
+  },
+  "readme": "https://github.com/Raznar-Lab/Raznar-Pterodactyl",
   "author": "Raznar",
   "license": "MIT",
   "devDependencies": {
