@@ -5,7 +5,6 @@
   "main": "./dist/index.js",
   "author": "Raznar",
   "license": "MIT",
-  "private": true,
   "devDependencies": {
     "@jest/types": "^26.6.2",
     "@types/jest": "^26.0.23",
