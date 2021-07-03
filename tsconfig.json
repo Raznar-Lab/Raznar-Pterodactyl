@@ -5,7 +5,9 @@
         "target": "ES2016",
         "module": "CommonJS",
         "pretty": true,
-        "outDir": "./dist"
+        "outDir": "./dist",
+        "declaration": true,
+        "sourceMap": true
     },
     "include": ["src/**/*"],
     "exclude": ["node_modules"]

@@ -7,7 +7,8 @@ const reconnectErrors = [
     "jwt: created too far in past (denylist)",
 ];
 type Powers = "start" | "stop" | "restart" | "kill";
-class WebsocketHandler {
+
+export class WebsocketHandler {
     constructor(private request: IRequest, private _identifier: string) {}
     private async getWebsocketToken() {
         const responseWs = await this.request(`/servers/${this._identifier}/websocket`, {
@@ -73,7 +74,8 @@ class WebsocketHandler {
         return this.socket;
     }
 }
-export default function ConsoleServer(request: IRequest, serverID: string): WebsocketHandler {
+
+export default function Console(request: IRequest, serverID: string) {
     try {
         const handler = new WebsocketHandler(request, serverID);
         handler.connect();

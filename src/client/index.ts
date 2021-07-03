@@ -13,7 +13,6 @@ import SetAllocationNote from "./server/network/SetAllocationNote";
 import SetAsPrimary from "./server/network/SetAsPrimary";
 import createSchedule from "./server/schedules/CreateSchedule";
 import GetSchedules from "./server/schedules/GetSchedules";
-import ConsoleServer from "./server/Console";
 import GetServerDetails from "./server/GetDetails";
 import ShowPermissions from "./ShowPermissions";
 import GetSchedule from "./server/schedules/GetSchedule";
@@ -45,6 +44,7 @@ import GetUploadFileUrl from "./server/files/GetUploadFileUrl";
 import CompressFile from "./server/files/CompressFile";
 import DecompressFile from "./server/files/DecompressFile";
 import CreateFolder from "./server/files/CreateFolder";
+import Console from "./server/Console";
 
 export default class Client {
     constructor(private _request: IRequest) {}
@@ -109,7 +109,8 @@ class ServerClient {
      * 
      * @param serverID Server Identifier
      */
-    public getConsole = (serverID: string) => ConsoleServer(this._request, serverID);
+    public getConsole = (serverID: string) => Console(this._request, serverID);
+    
     /**
      * Retrieves detail from a server
      * 

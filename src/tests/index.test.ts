@@ -1,5 +1,4 @@
 import Pterodactyl from "..";
-import AccountDetails from "../client/account/details";
 
 const clientKey = "wL1RwAo9Kj8dMucMbKX8kcFo4daCsnfggQLhJjU8bEf98BK9";
 const pteroClient = new Pterodactyl("https://admin.hosting.raznar.id", clientKey);
