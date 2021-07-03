@@ -1,4 +1,4 @@
 {
     "entryPoints": ["./src/"],
-    "out": "ractyl-docs"
+    "out": "docs"
 }
