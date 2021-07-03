@@ -47,7 +47,7 @@ export default class Admin {
     public servers = new ServersAdmin(this._request);
 }
 
-class LocationAdmin {
+export class LocationAdmin {
     constructor(private _request: IRequest) {}
 
     public create = (shortCode: string, description: string) => CreateLocation(this._request, shortCode, description);
@@ -57,7 +57,7 @@ class LocationAdmin {
     public update = (locationID: number, shortCode: string, description: string) => UpdateLocation(this._request, locationID, shortCode, description);
 }
 
-class NestsAdmin {
+export class NestsAdmin {
     constructor(private _request: IRequest) {}
 
     public getDetails = (nestID: number) => GetNestDetails(this._request, nestID);
@@ -65,14 +65,14 @@ class NestsAdmin {
     public eggs = new EggsAdmin(this._request);
 }
 
-class EggsAdmin {
+export class EggsAdmin {
     constructor(private _request: IRequest) {}
     
     public getDetails = (nestID: number, eggID: number) => GetEggsDetails(this._request, nestID, eggID);
     public getAll = (nestID: number) => GetEggs(this._request, nestID);
 }
 
-class UsersAdmin {
+export class UsersAdmin {
     constructor(private _request: IRequest) {}
     public create = (userArgs: IAdminUserRequest) => CreateUser(this._request, userArgs);
     public delete = (userID: number, externalID?: string) => DeleteUser(this._request, userID, externalID);
@@ -92,13 +92,13 @@ class NodesAdmin {
     public allocation = new AllocationsAdmin(this._request);
 }
 
-class AllocationsAdmin {
+export class AllocationsAdmin {
     constructor(private _request: IRequest) {}
     public create = (nodeID: number, ipAddress: string, ports: number[]) => CreateAllocation(this._request, nodeID, ipAddress, ports);
     public delete = (nodeID: number, allocationID: number) => DeleteAllocation(this._request, nodeID, allocationID);
     public getAll = (nodeID: number) => GetAllocations(this._request, nodeID);
 }
-class ServersAdmin {
+export class ServersAdmin {
     constructor(private _request: IRequest) {}
     public create = (serverArgs: IAdminServerRequest) => CreateServer(this._request, serverArgs);
     public delete = (serverID: string | number, external: boolean, force?: boolean) => DeleteServer(this._request, serverID, external, force);
@@ -113,7 +113,7 @@ class ServersAdmin {
     public databases = new ServersDatabasesAdmin(this._request);
 }
 
-class ServersDatabasesAdmin {
+export class ServersDatabasesAdmin {
     constructor(private _request: IRequest) {}
     public create = (serverID: string | number, databaseArgs: IAdminServerDatabaseRequest, external?: boolean) => CreateServerDatabase(this._request, serverID, databaseArgs, external);
     public delete = (serverID: string | number, databaseID: number, external?: boolean) => DeleteServerDatabase(this._request, serverID, databaseID, external);

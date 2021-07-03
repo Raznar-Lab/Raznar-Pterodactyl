@@ -55,7 +55,7 @@ export default class Client {
 
 }
 
-class AccountClient {
+export class AccountClient {
     constructor(private _request: IRequest) {}
     /**
      * Generates a QR Code url for 2FA
@@ -97,7 +97,7 @@ class AccountClient {
      */
     public updatePassword = (currentPassword: string, newPassword: string) => UpdatePassword(this._request, currentPassword, newPassword);
 }
-class ServerClient {
+export class ServerClient {
     constructor(private _request: IRequest) {}
     /**
      * Retrieves all server
@@ -126,7 +126,7 @@ class ServerClient {
     public files = new FilesClient(this._request);
 }
 
-class ServerScheduleClient {
+export class ServerScheduleClient {
     constructor(private _request: IRequest) {}
     /**
      * Retrieves all schedule from a server
@@ -159,7 +159,7 @@ class ServerScheduleClient {
     public task = (serverID: string, scheduleId: number) => new ServerScheduleTask(this._request, serverID, scheduleId);
 }
 
-class ServerScheduleTask {
+export class ServerScheduleTask {
     constructor(private _request: IRequest, private serverID: string, private scheduleID: number) {}
 
     /**
@@ -186,7 +186,7 @@ class ServerScheduleTask {
     public update = (taskId: number, args: IClientServerScheduleTaskArgs) => UpdateTask(this._request, this.serverID, this.scheduleID, taskId, args);
 }
 
-class NetworkClient {
+export class NetworkClient {
     constructor(private _request: IRequest) {}
     /**
      * Automatically assigns a new allocation if auto-assign is enabled on the instance
@@ -229,7 +229,7 @@ class NetworkClient {
     public setNote = (serverID: string, allocationID: number, allocationNotes: string) => SetAllocationNote(this._request, serverID, allocationID, allocationNotes);
 }
 
-class StartupClient {
+export class StartupClient {
     constructor(private _request: IRequest) {}
     /**
      * Retrieves the startup variables for the specified server
@@ -282,7 +282,7 @@ class BackupsClient {
     public getDownloadURL = (serverID: string, backupID: string) => DownloadBackup(this._request, serverID, backupID);
 }
 
-class UsersClient {
+export class UsersClient {
     constructor(private _request: IRequest) {}
 
     /**
@@ -319,7 +319,7 @@ class UsersClient {
     public delete = (serverID: string, userUUID: string) => DeleteUser(this._request, serverID, userUUID);
 }
 
-class DatabaseClient {
+export class DatabaseClient {
     constructor(private _request: IRequest) {}
 
     /**
@@ -353,7 +353,7 @@ class DatabaseClient {
     public rotate = (serverID: string, databaseID: string) => RotateDatabasePassword(this._request, serverID, databaseID);
 }
 
-class FilesClient {
+export class FilesClient {
     constructor(private _request: IRequest) {}
 
     /**
