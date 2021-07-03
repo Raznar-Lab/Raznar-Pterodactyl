@@ -1,5 +1,5 @@
 {
-  "name": "racty",
+  "name": "ractyl",
   "version": "1.0.0",
   "description": "The library makes it easy to manage pterodactyl APIs with the completeness of available functions.",
   "main": "./dist/index.js",

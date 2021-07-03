@@ -7,13 +7,13 @@ Ractyl (Raznar Pterodactyl) is an API Wrapper for Pterodactyl Panels (pterodacty
 You can using YARN or NPM.
 
 With NPM
-> npm install @raznarid/pterodactyl
+> npm install ractyl
 
 or (install from source)
 > npm install https://github.com/Raznar-Lab/Raznar-Pterodactyl
 
 With YARN
-> yarn add @raznarid/pterodactyl
+> yarn add ractyl
 
 or (install from source)
 > yarn add https://github.com/Raznar-Lab/Raznar-Pterodactyl
@@ -24,7 +24,7 @@ It's easy to use. First, import this library into your code.
 ## 🤔 How to import it?
 If you're using TypeScript
 ```ts
-import Ractyl from "@raznarid/pterodactyl";
+import Ractyl from "ractyl";
 
 const ptero = new Ractyl("here, put your pterodactyl panel baseurl", "here, put your apikey");
 
@@ -37,7 +37,7 @@ ptero.client.servers.getAll().then(console.log).catch(console.error);
 
 If you're using JavaScript
 ```js
-const Ractyl = require("@raznarid/pterodactyl").default;
+const Ractyl = require("ractyl").default;
 
 const ptero = new Ractyl("here, put your pterodactyl panel baseurl", "here, put your apikey");
 
