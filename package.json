@@ -1,6 +1,6 @@
 {
   "name": "ractyl",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "The library makes it easy to manage pterodactyl APIs with the completeness of available functions.",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
