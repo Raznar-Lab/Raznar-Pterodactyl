@@ -3,7 +3,7 @@ import DactylError from "../../util/error";
 
 export default async function GetServers(request: IRequest): Promise<IAdminServer> {
     try {
-        const response = await request("/servers", {
+        const response = await request("/servers?per_page=90000", {
             method: "GET"
         });
         const json = await response.json();
