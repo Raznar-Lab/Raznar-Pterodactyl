@@ -45,6 +45,7 @@ export default class Admin {
     public users = new UsersAdmin(this._request);
     public nodes = new NodesAdmin(this._request)
     public servers = new ServersAdmin(this._request);
+    public allocations = new AllocationsAdmin(this._request);
 }
 
 export class LocationAdmin {
